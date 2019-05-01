@@ -6,27 +6,27 @@ import { Provider } from 'react-redux';
 import './index.css';
 
 import App from './App';
-import { todosReducer } from 'src/reducers/todosReducer';
+import todosReducer from './reducers/todosReducer';
 
 import * as serviceWorker from './serviceWorker';
 
 const rootReducer = () => {
-    return combineReducers({
-        todos: todosReducer,
-    });
+	return combineReducers({
+		todos: todosReducer,
+	});
 }
 
 const store = createStore(
-    rootReducer,
-    // Support for Redux dev tools
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	rootReducer,
+	// Support for Redux dev tools
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App /> 
-    </Provider>,
-    document.getElementById('root')
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
