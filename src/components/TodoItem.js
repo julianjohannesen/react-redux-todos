@@ -1,32 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTodoItem, removeTodoItem, markTodoItemDone, markTodoItemArchived } from '../actions/actions'
 
 
 class TodoItem extends Component {
 
     state = {
+        archived: false,
         completed: false,
     }
 
-    handleCheck = (e) => {
+    handleLocal = (e) => {
         this.setState({
-            completed: !this.state.completed,
+            [e.target.name]: !this.state[e.target.name],
         });
         
     }
 
     generateList = () => {
         this.props.todos.map( todo => (
-            <li key={this.props.todo.id}>
+            <li key={todo.id}>
                 <input
-                    name={"markDone-" + this.props.todo.id}
-                    onChange={this.handleCheck}
+                    name={"markDone-" + todo.id}
+                    onChange={this.handleLocal}
                     type="checkbox"
+                    value={this.state.completed}
                 />
-                <span>{this.props.todo.todoText}</span>
-                <button name={"remove-" + this.props.todo.id}>Remove</button>
-                <button name={"archive-" + this.props.todo.id}>Archive</button>
+                <span>
+                    {todo.todoText}
+                </span>
+                <button 
+                    name={"remove-" + todo.id} 
+                    onClick={this.handleLocal}
+                >
+                    Remove
+                </button>
+                <button 
+                    name={"archive-" + todo.id}
+                    onClick={this.handleLocal}
+                >
+                    Archive
+                </button>
             </li>
         ))
     }
@@ -34,8 +47,7 @@ class TodoItem extends Component {
     render() {
         return (
             <div>
-                {this.generateList()}
-
+                {this.props.todos ? this.generateList() : null}
             </div>
         )
     }
@@ -47,7 +59,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(
-    mapStateToProps, 
-    { addTodoItem, removeTodoItem, markTodoItemDone, markTodoItemArchived }
-)(TodoItem);
+export default connect(mapStateToProps)(TodoItem);

@@ -1,22 +1,8 @@
-import uuid from 'uuid';
-
-const todosReducer = (state=[
-    {
-        todoText: "Item 1",
-        completed: false,
-        archived: false,
-        id: uuid()
-    },
-    {
-        todoText: "Item 2",
-        completed: false,
-        archived: false,
-        id: uuid()
-    },
-], action) => {
+const todosReducer = (state=[], action) => {
     switch(action.type){
         case 'ADD_TODO_ITEM':
             // Return all todo items, with the new item appended
+            // Remember that action.todo is the entire todo item
             return [...state, action.todo]
         case 'REMOVE_TODO_ITEM':
             // Get the index of the todo item with the passed in id

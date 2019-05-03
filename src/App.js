@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import './App.css';
+
+import TodoForm from './components/TodoForm';
+import TodoItem from './components/TodoItem';
 
 class App extends Component {
 
@@ -8,9 +10,11 @@ class App extends Component {
 		return (
 			<div className="App">
 				<h1>Hello, world!</h1>
+				<TodoForm />
+				<TodoItem />
 			</div>
 		);
 	}
 }
 
-export default connect(null)(App);
+export default App;
